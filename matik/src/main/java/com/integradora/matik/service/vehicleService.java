@@ -50,6 +50,7 @@ public class vehicleService {
                 .withPriceDay(VehicleDto.getPriceDay())
                 .withMileage(VehicleDto.getMileage())
                 .withStatus(VehicleDto.getStatus())
+                .withImage(VehicleDto.getImage())
                 .build();
     }
 
@@ -65,6 +66,7 @@ public class vehicleService {
                 .withPriceDay(VehicleEntity.getPriceDay())
                 .withMileage(VehicleEntity.getMileage())
                 .withStatus(VehicleEntity.getStatus())
+                .withImage(VehicleEntity.getImage())
                 .build();
     }
 
@@ -84,6 +86,7 @@ public class vehicleService {
             existingVehicle.setPriceDay(vehicleDto.getPriceDay());
             existingVehicle.setMileage(vehicleDto.getMileage());
             existingVehicle.setStatus(vehicleDto.getStatus());
+            existingVehicle.setImage(vehicleDto.getImage());
 
             // Guardar los cambios en la base de datos
             vehicleEntity updatedVehicle = VehicleRepo.save(existingVehicle);

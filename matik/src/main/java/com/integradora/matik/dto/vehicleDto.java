@@ -16,6 +16,7 @@ public class vehicleDto {
     private String priceDay;
     private String mileage;
     private String status;
+    private String image;
 
 
 }
