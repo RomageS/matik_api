@@ -6,7 +6,7 @@ import lombok.*;
 @Data
 @Builder(setterPrefix = "with")
 @Entity
-@Table(name = "vehicles")
+@Table(name = "vehicle")
 @AllArgsConstructor
 @NoArgsConstructor
 

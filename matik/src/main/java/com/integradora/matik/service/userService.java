@@ -1,18 +1,17 @@
 package com.integradora.matik.service;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import com.integradora.matik.Entity.userEntity;
 import com.integradora.matik.dto.userDto;
 import com.integradora.matik.repository.userRepo;
 import org.springframework.stereotype.Service;
+import java.util.Optional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class userService {
-
-
 
     private final userRepo UserRepo;
 
@@ -21,9 +20,23 @@ public class userService {
     }
 
     public Integer save(userDto UserDto) {
+        try {
+            // Verificar si el correo ya existe
+            if (UserRepo.existsByEmail(UserDto.getEmail())) {
+                throw new IllegalStateException("El correo ya está en uso");
+            }
 
-        userEntity UserEntity = dtoToEntity(UserDto);
-        return UserRepo.save(UserEntity).getId();
+            userEntity UserEntity = dtoToEntity(UserDto);
+            return UserRepo.save(UserEntity).getId();
+        }
+
+        catch (DataIntegrityViolationException e) {
+            // Capturar la excepción de unicidad y lanzar un mensaje claro
+            throw new IllegalStateException("Error: El correo ya está registrado.");
+        } catch (Exception e) {
+            // Manejar otros errores
+            throw new IllegalStateException("Ocurrió un error al registrar el usuario.");
+        }
     }
 
     // Método para obtener todos los usuarios y convertirlos a DTO

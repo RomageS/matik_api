@@ -24,9 +24,22 @@ public class userController {
     }
 
     @PostMapping
+    // Registro de usuario
     public ResponseEntity<Object> save(@RequestBody userDto UserDto) {
-        return new ResponseEntity<>(UserService.save(UserDto), HttpStatus.CREATED);
+        try {
+            Integer userId = UserService.save(UserDto);
+            return new ResponseEntity<>(userId, HttpStatus.CREATED);
+        } catch (IllegalStateException e) {
+            // Manejo del error de correo duplicado
+            if (e.getMessage().contains("correo ya está en uso")) {
+                return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT); // Código 409
+            }
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Ocurrió un error al procesar la solicitud.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
 
 
     @GetMapping()

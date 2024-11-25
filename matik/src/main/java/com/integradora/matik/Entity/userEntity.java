@@ -22,5 +22,4 @@ public class userEntity {
     private String email;
     private String address;
     private String image;
-
 }
