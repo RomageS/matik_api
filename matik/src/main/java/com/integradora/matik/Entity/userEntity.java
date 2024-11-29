@@ -13,13 +13,17 @@ import lombok.*;
 public class userEntity {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String lastName;
     private String Password;
-    @Column(name="email_address", unique = true)
+    @Column(name = "email_address", unique = true)
     private String email;
     private String address;
     private String image;
+
+    @Column(name = "role", nullable = false)
+    private String role = "USER"; // Ejemplo: "ADMIN", "USER", "GUEST"
+
 }

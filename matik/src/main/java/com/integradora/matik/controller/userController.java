@@ -23,6 +23,18 @@ public class userController {
         this.UserService = UserService;
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<Object> login(@RequestBody userDto loginRequest) {
+        try {
+            userDto user = UserService.login(loginRequest.getEmail(), loginRequest.getPassword());
+            return new ResponseEntity<>(user, HttpStatus.OK); // Retorna el usuario encontrado
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED); // Credenciales inválidas
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error en el inicio de sesión", HttpStatus.INTERNAL_SERVER_ERROR); // Error general
+        }
+    }
+
     @PostMapping
     // Registro de usuario
     public ResponseEntity<Object> save(@RequestBody userDto UserDto) {
@@ -39,7 +51,6 @@ public class userController {
             return new ResponseEntity<>("Ocurrió un error al procesar la solicitud.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 
 
     @GetMapping()

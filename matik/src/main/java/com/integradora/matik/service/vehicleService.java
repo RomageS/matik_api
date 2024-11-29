@@ -3,6 +3,7 @@ package com.integradora.matik.service;
 import com.integradora.matik.Entity.vehicleEntity;
 import com.integradora.matik.dto.vehicleDto;
 import com.integradora.matik.repository.vehicleRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class vehicleService {
 
     private final vehicleRepo VehicleRepo;
 
+    @Autowired
     public vehicleService(vehicleRepo VehicleRepo) {
         this.VehicleRepo = VehicleRepo;
     }
@@ -47,7 +49,7 @@ public class vehicleService {
                 .withYear(VehicleDto.getYear())
                 .withColor(VehicleDto.getColor())
                 .withTransmission(VehicleDto.getTransmission())
-                .withPriceDay(VehicleDto.getPriceDay())
+                .withPrice_day(VehicleDto.getPrice_day())
                 .withMileage(VehicleDto.getMileage())
                 .withStatus(VehicleDto.getStatus())
                 .withImage(VehicleDto.getImage())
@@ -63,7 +65,7 @@ public class vehicleService {
                 .withYear(VehicleEntity.getYear())
                 .withColor(VehicleEntity.getColor())
                 .withTransmission(VehicleEntity.getTransmission())
-                .withPriceDay(VehicleEntity.getPriceDay())
+                .withPrice_day(VehicleEntity.getPrice_day())
                 .withMileage(VehicleEntity.getMileage())
                 .withStatus(VehicleEntity.getStatus())
                 .withImage(VehicleEntity.getImage())
@@ -83,7 +85,7 @@ public class vehicleService {
             existingVehicle.setYear(vehicleDto.getYear());
             existingVehicle.setColor(vehicleDto.getColor());
             existingVehicle.setTransmission(vehicleDto.getTransmission());
-            existingVehicle.setPriceDay(vehicleDto.getPriceDay());
+            existingVehicle.setPrice_day(vehicleDto.getPrice_day());
             existingVehicle.setMileage(vehicleDto.getMileage());
             existingVehicle.setStatus(vehicleDto.getStatus());
             existingVehicle.setImage(vehicleDto.getImage());

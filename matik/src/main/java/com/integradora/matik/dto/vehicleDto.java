@@ -13,8 +13,8 @@ public class vehicleDto {
     private String year;
     private String color;
     private String transmission;
-    private String priceDay;
-    private String mileage;
+    private double price_day;
+    private Integer mileage;
     private String status;
     private String image;
 

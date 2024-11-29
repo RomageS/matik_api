@@ -13,6 +13,25 @@ import java.util.stream.Collectors;
 @Service
 public class userService {
 
+    public userDto login(String email, String password) {
+        // Buscar usuario por correo
+        Optional<userEntity> optionalUser = UserRepo.findByEmail(email);
+
+        if (optionalUser.isPresent()) {
+            userEntity user = optionalUser.get();
+
+            // Validar contraseña
+            if (user.getPassword().equals(password)) {
+                // Retorna el usuario como DTO si las credenciales son correctas
+                return entityToDto(user);
+            } else {
+                throw new IllegalArgumentException("Contraseña incorrecta");
+            }
+        } else {
+            throw new IllegalArgumentException("Usuario no encontrado");
+        }
+    }
+
     private final userRepo UserRepo;
 
     public userService(userRepo UserRepo) {
@@ -26,7 +45,13 @@ public class userService {
                 throw new IllegalStateException("El correo ya está en uso");
             }
 
+            // Convertir DTO a entidad
             userEntity UserEntity = dtoToEntity(UserDto);
+
+            // Asignar el rol "USER" por defecto si no se especifica
+            if (UserEntity.getRole() == null || UserEntity.getRole().isEmpty()) {
+                UserEntity.setRole("USER");
+            }
             return UserRepo.save(UserEntity).getId();
         }
 
@@ -61,6 +86,7 @@ public class userService {
                 .withEmail(UserDto.getEmail())
                 .withAddress(UserDto.getAddress())
                 .withImage(UserDto.getImage())
+                .withRole(UserDto.getRole())
                 .build();
     }
 
@@ -74,6 +100,7 @@ public class userService {
                 .withEmail(UserEntity.getEmail())
                 .withAddress(UserEntity.getAddress())
                 .withImage(UserEntity.getImage())
+                .withRole(UserEntity.getRole())
                 .build();
     }
 
@@ -103,6 +130,7 @@ public class userService {
             userEntity.setEmail(UserDto.getEmail());
             userEntity.setAddress(UserDto.getAddress());
             userEntity.setImage(UserDto.getImage());
+            userEntity.setRole(UserDto.getRole());
 
             // Guarda los cambios en la base de datos
             userEntity updatedEntity = UserRepo.save(userEntity);
