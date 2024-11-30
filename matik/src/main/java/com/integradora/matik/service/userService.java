@@ -13,6 +13,13 @@ import java.util.stream.Collectors;
 @Service
 public class userService {
 
+
+    public userDto getUserByEmail(String email) {
+        userEntity user = UserRepo.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
+        return entityToDto(user);
+    }
+
     public userDto login(String email, String password) {
         // Buscar usuario por correo
         Optional<userEntity> optionalUser = UserRepo.findByEmail(email);
@@ -70,6 +77,7 @@ public class userService {
                 .map(this::entityToDto) // Convierte cada entidad a DTO
                 .collect(Collectors.toList());
     }
+
 
     // Método para buscar un usuario por ID y convertirlo a DTO
     public userDto findUserById(Integer id) {

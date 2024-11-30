@@ -23,5 +23,7 @@ public class vehicleEntity {
     private double price_day;
     private Integer mileage;
     private String status;
+    @Lob
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String image;
 }

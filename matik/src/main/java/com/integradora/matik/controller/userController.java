@@ -64,6 +64,8 @@ public class userController {
         return UserService.findUserById(id);
     }
 
+
+
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateUser(@PathVariable int id, @RequestBody userDto UserDto) {
         userDto updatedUser = UserService.updateUser(id, UserDto);
@@ -74,6 +76,8 @@ public class userController {
             return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
         }
     }
+
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteUser(@PathVariable int id) {
