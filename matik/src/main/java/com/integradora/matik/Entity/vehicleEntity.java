@@ -26,4 +26,5 @@ public class vehicleEntity {
     @Lob
     @Column(columnDefinition = "MEDIUMTEXT")
     private String image;
+
 }

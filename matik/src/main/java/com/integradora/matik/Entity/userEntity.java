@@ -21,7 +21,6 @@ public class userEntity {
     @Column(name = "email_address", unique = true)
     private String email;
     private String address;
-    private String image;
 
     @Column(name = "role", nullable = false)
     private String role = "USER"; // Ejemplo: "ADMIN", "USER", "GUEST"

@@ -1,6 +1,7 @@
 package com.integradora.matik.controller;
 
 import com.integradora.matik.dto.userDto;
+import com.integradora.matik.repository.ReserveRepo;
 import com.integradora.matik.repository.userRepo;
 import com.integradora.matik.service.userService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import java.util.List;
 public class userController {
 
     private final userService UserService;
+    private ReserveRepo reserveService;
 
 
     @Autowired
@@ -63,8 +65,6 @@ public class userController {
     public userDto getUserById(@PathVariable int id) {
         return UserService.findUserById(id);
     }
-
-
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateUser(@PathVariable int id, @RequestBody userDto UserDto) {

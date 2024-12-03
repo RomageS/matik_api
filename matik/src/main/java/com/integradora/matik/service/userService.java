@@ -93,7 +93,6 @@ public class userService {
                 .withPassword(UserDto.getPassword())
                 .withEmail(UserDto.getEmail())
                 .withAddress(UserDto.getAddress())
-                .withImage(UserDto.getImage())
                 .withRole(UserDto.getRole())
                 .build();
     }
@@ -107,7 +106,6 @@ public class userService {
                 .withPassword(UserEntity.getPassword())
                 .withEmail(UserEntity.getEmail())
                 .withAddress(UserEntity.getAddress())
-                .withImage(UserEntity.getImage())
                 .withRole(UserEntity.getRole())
                 .build();
     }
@@ -137,7 +135,6 @@ public class userService {
             userEntity.setPassword(UserDto.getPassword());
             userEntity.setEmail(UserDto.getEmail());
             userEntity.setAddress(UserDto.getAddress());
-            userEntity.setImage(UserDto.getImage());
             userEntity.setRole(UserDto.getRole());
 
             // Guarda los cambios en la base de datos

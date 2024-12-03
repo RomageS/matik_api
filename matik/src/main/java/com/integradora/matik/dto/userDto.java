@@ -15,6 +15,5 @@ public class userDto {
     private String Password;
     private String email;
     private String address;
-    private String image;
     private String role; // Ejemplo: "ADMIN", "USER", "GUEST"
 }
